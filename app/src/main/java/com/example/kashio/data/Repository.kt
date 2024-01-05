@@ -18,24 +18,26 @@ package com.example.kashio.data
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.example.kashio.data.local.database.DataItemType
-import com.example.kashio.data.local.database.DataItemTypeDao
+import com.example.kashio.data.local.database.Time
+import com.example.kashio.data.local.database.TimeDao
+import com.example.kashio.data.local.database.TimeDaoAc
 import javax.inject.Inject
 
-interface DataItemTypeRepository {
+interface Repository {
     val dataItemTypes: Flow<List<String>>
 
     suspend fun add(name: String)
 }
 
-class DefaultDataItemTypeRepository @Inject constructor(
-    private val dataItemTypeDao: DataItemTypeDao
-) : DataItemTypeRepository {
+class DefaultRepository @Inject constructor(
+    private val timeDao: TimeDao,
+    private val timeDaoAc: TimeDaoAc
+) : Repository {
 
     override val dataItemTypes: Flow<List<String>> =
-        dataItemTypeDao.getDataItemTypes().map { items -> items.map { it.name } }
+        timeDao.getDataItemTypes().map { items -> items.map { it.name } }
 
     override suspend fun add(name: String) {
-        dataItemTypeDao.insertDataItemType(DataItemType(name = name))
+        timeDao.insertDataItemType(Time(name = name))
     }
 }

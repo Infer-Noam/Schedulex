@@ -30,7 +30,7 @@ import org.junit.runner.RunWith
  * UI tests for [DataItemTypeScreen].
  */
 @RunWith(AndroidJUnit4::class)
-class DataItemTypeScreenTest {
+class TimeScreenTest {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()

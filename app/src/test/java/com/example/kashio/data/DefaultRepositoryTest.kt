@@ -23,18 +23,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import com.example.kashio.data.local.database.DataItemType
-import com.example.kashio.data.local.database.DataItemTypeDao
+import com.example.kashio.data.local.database.Time
+import com.example.kashio.data.local.database.TimeDao
 
 /**
- * Unit tests for [DefaultDataItemTypeRepository].
+ * Unit tests for [DefaultRepository].
  */
 @OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
-class DefaultDataItemTypeRepositoryTest {
+class DefaultRepositoryTest {
 
     @Test
     fun dataItemTypes_newItemSaved_itemIsReturned() = runTest {
-        val repository = DefaultDataItemTypeRepository(FakeDataItemTypeDao())
+        val repository = DefaultRepository(FakeTimeDao())
 
         repository.add("Repository")
 
@@ -43,15 +43,15 @@ class DefaultDataItemTypeRepositoryTest {
 
 }
 
-private class FakeDataItemTypeDao : DataItemTypeDao {
+private class FakeTimeDao : TimeDao {
 
-    private val data = mutableListOf<DataItemType>()
+    private val data = mutableListOf<Time>()
 
-    override fun getDataItemTypes(): Flow<List<DataItemType>> = flow {
+    override fun getDataItemTypes(): Flow<List<Time>> = flow {
         emit(data)
     }
 
-    override suspend fun insertDataItemType(item: DataItemType) {
+    override suspend fun insertDataItemType(item: Time) {
         data.add(0, item)
     }
 }

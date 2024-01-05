@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import com.example.kashio.data.DataItemTypeRepository
+import com.example.kashio.data.Repository
 import com.example.kashio.ui.dataitemtype.DataItemTypeUiState.Error
 import com.example.kashio.ui.dataitemtype.DataItemTypeUiState.Loading
 import com.example.kashio.ui.dataitemtype.DataItemTypeUiState.Success
@@ -33,17 +33,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DataItemTypeViewModel @Inject constructor(
-    private val dataItemTypeRepository: DataItemTypeRepository
+    private val repository: Repository
 ) : ViewModel() {
 
-    val uiState: StateFlow<DataItemTypeUiState> = dataItemTypeRepository
+    val uiState: StateFlow<DataItemTypeUiState> = repository
         .dataItemTypes.map<List<String>, DataItemTypeUiState>(::Success)
         .catch { emit(Error(it)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Loading)
 
     fun addDataItemType(name: String) {
         viewModelScope.launch {
-            dataItemTypeRepository.add(name)
+            repository.add(name)
         }
     }
 }

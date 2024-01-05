@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import com.example.kashio.data.DataItemTypeRepository
+import com.example.kashio.data.Repository
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -32,21 +32,21 @@ import com.example.kashio.data.DataItemTypeRepository
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
-class DataItemTypeViewModelTest {
+class TimeViewModelTest {
     @Test
     fun uiState_initiallyLoading() = runTest {
-        val viewModel = DataItemTypeViewModel(FakeDataItemTypeRepository())
+        val viewModel = DataItemTypeViewModel(FakeRepository())
         assertEquals(viewModel.uiState.first(), DataItemTypeUiState.Loading)
     }
 
     @Test
     fun uiState_onItemSaved_isDisplayed() = runTest {
-        val viewModel = DataItemTypeViewModel(FakeDataItemTypeRepository())
+        val viewModel = DataItemTypeViewModel(FakeRepository())
         assertEquals(viewModel.uiState.first(), DataItemTypeUiState.Loading)
     }
 }
 
-private class FakeDataItemTypeRepository : DataItemTypeRepository {
+private class FakeRepository : Repository {
 
     private val data = mutableListOf<String>()
 

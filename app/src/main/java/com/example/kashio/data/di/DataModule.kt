@@ -22,8 +22,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import com.example.kashio.data.DataItemTypeRepository
-import com.example.kashio.data.DefaultDataItemTypeRepository
+import com.example.kashio.data.Repository
+import com.example.kashio.data.DefaultRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,11 +34,11 @@ interface DataModule {
     @Singleton
     @Binds
     fun bindsDataItemTypeRepository(
-        dataItemTypeRepository: DefaultDataItemTypeRepository
-    ): DataItemTypeRepository
+        dataItemTypeRepository: DefaultRepository
+    ): Repository
 }
 
-class FakeDataItemTypeRepository @Inject constructor() : DataItemTypeRepository {
+class FakeRepository @Inject constructor() : Repository {
     override val dataItemTypes: Flow<List<String>> = flowOf(fakeDataItemTypes)
 
     override suspend fun add(name: String) {

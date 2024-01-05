@@ -19,7 +19,9 @@ package com.example.kashio.data.local.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [DataItemType::class], version = 1)
+@Database(entities = [Time::class, TimeAc::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun dataItemTypeDao(): DataItemTypeDao
+    abstract fun timeDao(): TimeDao
+
+    abstract fun timeDaoAc(): TimeDaoAc
 }

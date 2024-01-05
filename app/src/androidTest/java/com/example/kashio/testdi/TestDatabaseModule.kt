@@ -20,9 +20,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
-import com.example.kashio.data.DataItemTypeRepository
+import com.example.kashio.data.Repository
 import com.example.kashio.data.di.DataModule
-import com.example.kashio.data.di.FakeDataItemTypeRepository
+import com.example.kashio.data.di.FakeRepository
 
 @Module
 @TestInstallIn(
@@ -33,6 +33,6 @@ interface FakeDataModule {
 
     @Binds
     abstract fun bindRepository(
-        fakeRepository: FakeDataItemTypeRepository
-    ): DataItemTypeRepository
+        fakeRepository: FakeRepository
+    ): Repository
 }
