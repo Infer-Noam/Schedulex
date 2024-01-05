@@ -24,7 +24,9 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import com.example.kashio.data.local.database.Time
+import com.example.kashio.data.local.database.TimeAc
 import com.example.kashio.data.local.database.TimeDao
+import com.example.kashio.data.local.database.TimeDaoAc
 
 /**
  * Unit tests for [DefaultRepository].
@@ -34,7 +36,7 @@ class DefaultRepositoryTest {
 
     @Test
     fun dataItemTypes_newItemSaved_itemIsReturned() = runTest {
-        val repository = DefaultRepository(FakeTimeDao())
+        val repository = DefaultRepository(FakeTimeDao(), FakeTimeDaoAc())
 
         repository.add("Repository")
 
@@ -54,4 +56,29 @@ private class FakeTimeDao : TimeDao {
     override suspend fun insertDataItemType(item: Time) {
         data.add(0, item)
     }
+}
+
+private class FakeTimeDaoAc : TimeDaoAc {
+
+    override fun getAllTime(): Flow<List<TimeAc>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteTime(time: TimeAc) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getTime(id: Int): Flow<TimeAc> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertTime(time: TimeAc) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateTime(time: TimeAc) {
+
+    }
+
+
 }
