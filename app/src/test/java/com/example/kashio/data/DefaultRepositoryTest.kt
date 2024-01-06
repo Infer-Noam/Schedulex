@@ -36,7 +36,7 @@ class DefaultRepositoryTest {
 
     @Test
     fun dataItemTypes_newItemSaved_itemIsReturned() = runTest {
-        val repository = DefaultRepository(FakeItemDao(), FakeTimeDao())
+        val repository = DefaultRepository(FakeItemDao())
 
         repository.add("Repository")
 
