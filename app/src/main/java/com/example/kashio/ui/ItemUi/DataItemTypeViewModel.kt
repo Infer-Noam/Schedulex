@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kashio.ui.dataitemtype
+package com.example.kashio.ui.ItemUi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,9 +26,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import com.example.kashio.data.Repository
-import com.example.kashio.ui.dataitemtype.DataItemTypeUiState.Error
-import com.example.kashio.ui.dataitemtype.DataItemTypeUiState.Loading
-import com.example.kashio.ui.dataitemtype.DataItemTypeUiState.Success
+import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Error
+import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Loading
+import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Success
 import javax.inject.Inject
 
 @HiltViewModel

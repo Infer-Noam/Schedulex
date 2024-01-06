@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kashio.ui.dataitemtype
+package com.example.kashio.ui.ItemUi
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -30,7 +30,7 @@ import org.junit.runner.RunWith
  * UI tests for [DataItemTypeScreen].
  */
 @RunWith(AndroidJUnit4::class)
-class TimeScreenTest {
+class ItemScreenTest {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()

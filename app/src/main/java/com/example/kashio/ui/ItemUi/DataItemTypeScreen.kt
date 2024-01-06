@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kashio.ui.dataitemtype
+package com.example.kashio.ui.ItemUi
 
 import com.example.kashio.ui.theme.MyApplicationTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -90,6 +90,6 @@ private fun DefaultPreview() {
 @Composable
 private fun PortraitPreview() {
     MyApplicationTheme {
-        DataItemTypeScreen(listOf("Compose", "Room", "Kotlin"), onSave = {})
+        DataItemTypeScreen(listOf("Compose", "Room", "Kotlin"), onSave = {}  )
     }
 }

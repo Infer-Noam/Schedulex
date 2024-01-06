@@ -24,6 +24,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import com.example.kashio.data.Repository
 import com.example.kashio.data.DefaultRepository
+import com.example.kashio.data.DefaultTimeRepository
+import com.example.kashio.data.TimeRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,6 +38,13 @@ interface DataModule {
     fun bindsDataItemTypeRepository(
         dataItemTypeRepository: DefaultRepository
     ): Repository
+
+    @Singleton
+    @Binds
+    fun bindsTimeRepository(
+        timeRepository: DefaultTimeRepository
+    ): TimeRepository
+
 }
 
 class FakeRepository @Inject constructor() : Repository {
@@ -47,4 +56,3 @@ class FakeRepository @Inject constructor() : Repository {
 }
 
 val fakeDataItemTypes = listOf("One", "Two", "Three")
-

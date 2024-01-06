@@ -24,8 +24,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import com.example.kashio.data.local.database.AppDatabase
+import com.example.kashio.data.local.database.ItemDao
 import com.example.kashio.data.local.database.TimeDao
-import com.example.kashio.data.local.database.TimeDaoAc
 import javax.inject.Singleton
 
 
@@ -33,13 +33,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
     @Provides
-    fun provideDataItemTypeDao(appDatabase: AppDatabase): TimeDao {
-        return appDatabase.timeDao()
+    fun provideDataItemTypeDao(appDatabase: AppDatabase): ItemDao {
+        return appDatabase.itemDao()
     }
 
     @Provides
-    fun provideTimeAcDao(appDatabase: AppDatabase): TimeDaoAc {
-        return appDatabase.timeDaoAc()
+    fun provideTimeDao(appDatabase: AppDatabase): TimeDao {
+        return appDatabase.timeDao()
     }
 
     @Provides

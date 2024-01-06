@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4160c57bde359fc996309d14c2b8f7da",
+    "identityHash": "89c86b2d3ece3e6064d101e6ace1b303",
     "entities": [
       {
-        "tableName": "Time",
+        "tableName": "Item",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
@@ -31,7 +31,7 @@
         "foreignKeys": []
       },
       {
-        "tableName": "TimeAc",
+        "tableName": "Time",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`time` TEXT NOT NULL, `title` TEXT NOT NULL, `text` TEXT NOT NULL, `tag` TEXT NOT NULL, `uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
@@ -78,7 +78,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4160c57bde359fc996309d14c2b8f7da')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '89c86b2d3ece3e6064d101e6ace1b303')"
     ]
   }
 }

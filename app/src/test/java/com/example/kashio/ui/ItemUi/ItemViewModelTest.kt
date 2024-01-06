@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kashio.ui.dataitemtype
+package com.example.kashio.ui.ItemUi
 
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,7 +32,7 @@ import com.example.kashio.data.Repository
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
-class TimeViewModelTest {
+class ItemViewModelTest {
     @Test
     fun uiState_initiallyLoading() = runTest {
         val viewModel = DataItemTypeViewModel(FakeRepository())

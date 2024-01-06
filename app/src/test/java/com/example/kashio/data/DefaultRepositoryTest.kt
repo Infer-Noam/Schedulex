@@ -23,10 +23,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import com.example.kashio.data.local.database.Item
 import com.example.kashio.data.local.database.Time
-import com.example.kashio.data.local.database.TimeAc
+import com.example.kashio.data.local.database.ItemDao
 import com.example.kashio.data.local.database.TimeDao
-import com.example.kashio.data.local.database.TimeDaoAc
 
 /**
  * Unit tests for [DefaultRepository].
@@ -36,7 +36,7 @@ class DefaultRepositoryTest {
 
     @Test
     fun dataItemTypes_newItemSaved_itemIsReturned() = runTest {
-        val repository = DefaultRepository(FakeTimeDao(), FakeTimeDaoAc())
+        val repository = DefaultRepository(FakeItemDao(), FakeTimeDao())
 
         repository.add("Repository")
 
@@ -45,38 +45,38 @@ class DefaultRepositoryTest {
 
 }
 
-private class FakeTimeDao : TimeDao {
+private class FakeItemDao : ItemDao {
 
-    private val data = mutableListOf<Time>()
+    private val data = mutableListOf<Item>()
 
-    override fun getDataItemTypes(): Flow<List<Time>> = flow {
+    override fun getDataItemTypes(): Flow<List<Item>> = flow {
         emit(data)
     }
 
-    override suspend fun insertDataItemType(item: Time) {
+    override suspend fun insertDataItemType(item: Item) {
         data.add(0, item)
     }
 }
 
-private class FakeTimeDaoAc : TimeDaoAc {
+private class FakeTimeDao : TimeDao {
 
-    override fun getAllTime(): Flow<List<TimeAc>> {
+    override fun getAllTime(): Flow<List<Time>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun deleteTime(time: TimeAc) {
+    override suspend fun deleteTime(time: Time) {
         TODO("Not yet implemented")
     }
 
-    override fun getTime(id: Int): Flow<TimeAc> {
+    override fun getTime(id: Int): Flow<Time> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun insertTime(time: TimeAc) {
+    override suspend fun insertTime(time: Time) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateTime(time: TimeAc) {
+    override suspend fun updateTime(time: Time) {
 
     }
 

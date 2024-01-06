@@ -18,9 +18,10 @@ package com.example.kashio.data
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import com.example.kashio.data.local.database.Item
+import com.example.kashio.data.local.database.ItemDao
 import com.example.kashio.data.local.database.Time
 import com.example.kashio.data.local.database.TimeDao
-import com.example.kashio.data.local.database.TimeDaoAc
 import javax.inject.Inject
 
 interface Repository {
@@ -30,14 +31,32 @@ interface Repository {
 }
 
 class DefaultRepository @Inject constructor(
-    private val timeDao: TimeDao,
-    private val timeDaoAc: TimeDaoAc
+    private val itemDao: ItemDao,
 ) : Repository {
 
-    override val dataItemTypes: Flow<List<String>> =
-        timeDao.getDataItemTypes().map { items -> items.map { it.name } }
 
+    override val dataItemTypes: Flow<List<String>> =
+        itemDao.getDataItemTypes().map { items -> items.map { it.name } }
     override suspend fun add(name: String) {
-        timeDao.insertDataItemType(Time(name = name))
+        itemDao.insertDataItemType(Item(name = name))
     }
 }
+
+interface TimeRepository {
+
+    val times: Flow<List<Time>>
+
+    suspend fun insert(time: Time)
+}
+
+class DefaultTimeRepository @Inject constructor(
+    private val timeDao: TimeDao
+) : TimeRepository {
+
+    override val times: Flow<List<Time>> =
+        timeDao.getAllTime()
+
+    override suspend fun insert(time: Time) {
+        timeDao.insertTime(time)
+        }
+    }
