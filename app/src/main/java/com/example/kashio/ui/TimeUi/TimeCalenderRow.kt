@@ -46,35 +46,34 @@ fun CalendarRow(selectedDay: String, onSelectDay: (String) -> Unit) {
         .map { date ->
             val day = SimpleDateFormat("d", Locale.getDefault()).format(date)
             val dayOfWeek = SimpleDateFormat("E", Locale.getDefault()).format(date)
-            day to dayOfWeek
+            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date)
+            Triple(day, dayOfWeek, dateFormat)
         }
         .toList()
 
     val currentDateIndex = dates.indexOfFirst {
-        it.first == selectedDay
+        it.third == selectedDay
     }
 
     LazyRow(
         state = rememberLazyListState(initialFirstVisibleItemIndex = currentDateIndex - 2)
     ) {
-        items(dates) { (day, dayOfWeek) ->
+        items(dates) { (day, dayOfWeek, dateFormat) ->
             Card(
                 modifier = Modifier
                     .padding(8.dp)
                     .size(55.dp)  // Set a fixed size for the Card
-                    .clickable(onClick = {onSelectDay(day)})
-
-                    ,
-                    elevation = CardDefaults.cardElevation(
+                    .clickable(onClick = { onSelectDay(dateFormat) }),
+                elevation = CardDefaults.cardElevation(
                     defaultElevation = 4.dp
                 ),
-               // backgroundColor = if (selectedDay.value == day) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+                // backgroundColor = if (selectedDay.value == day) MaterialTheme.colors.primary else MaterialTheme.colors.surface
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxSize()
-                        .background(if (selectedDay == day) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primaryContainer),
+                        .background(if (selectedDay == dateFormat) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primaryContainer),
 
                     ) {
                     Text(
@@ -90,3 +89,4 @@ fun CalendarRow(selectedDay: String, onSelectDay: (String) -> Unit) {
         }
     }
 }
+

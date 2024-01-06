@@ -65,7 +65,7 @@ import java.util.Locale
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun TimeScreen(modifier: Modifier = Modifier, viewModel: TimeViewModel = hiltViewModel(), selectedDay: String?) {
+fun TimeScreen(modifier: Modifier = Modifier, viewModel: TimeViewModel = hiltViewModel(), selectedDay: String) {
     val blocks by viewModel.uiState.collectAsStateWithLifecycle()
         TimeScreen(
             blocks = blocks.timeBlocks,
@@ -80,7 +80,7 @@ internal fun TimeScreen(
     blocks: List<Time>,
     onSave: (time: String, title: String, text: String, tag: String) -> Unit,
     modifier: Modifier = Modifier,
-    selectedDay: String?
+    selectedDay: String
 ) {
     var time by remember { mutableStateOf("1250-06-01-2024") }
     var title by remember { mutableStateOf("lunch") }
@@ -91,9 +91,9 @@ internal fun TimeScreen(
 
     // Declaring and initializing a calendar
     val mCalendar = Calendar.getInstance()
-    val mYear = mCalendar[Calendar.YEAR]
-    val mMonth = mCalendar[Calendar.MONTH]  + 1
-    var mDay = mCalendar[Calendar.DAY_OF_MONTH]
+    val mYear = selectedDay.substring(6, 10)
+    val mMonth = selectedDay.substring(3, 5)
+    var mDay = selectedDay.substring(0, 2)
     val mHour = mCalendar[Calendar.HOUR_OF_DAY]
     val mMinute = mCalendar[Calendar.MINUTE]
 
@@ -104,7 +104,11 @@ internal fun TimeScreen(
         val mTimePickerDialog = TimePickerDialog(
             mContext,
             {_, mHour : Int, mMinute: Int ->
-                time = "$mMinute-$mHour-$mDay-$mMonth-$mYear" //mm-hh-dd-mm-yy
+                time = "${mMinute.toString().padStart(2,'0')}-" +
+                        "${mHour.toString().padStart(2,'0')}-" +
+                "${mDay.toString().padStart(2,'0')}-" +
+                "${mMonth.toString().padStart(2,'0')}-" +
+                        mYear.toString().padStart(4,'0')  //mm-hh-dd-mm-yy
             }, mHour, mMinute, true
         )
 
@@ -141,12 +145,15 @@ internal fun TimeScreen(
                 Text("Save")
             }
         }
-        blocks.forEach {
-            if (it.time.substring(6) == "$selectedDay-$mMonth-$mYear") {
-                Text("Saved item: ${it.time}")
-            }
+        //if...
+            blocks.forEach {
+                    if (it.time.substring(6) == selectedDay) {
+                        Text("Saved item: ${it.time}")
+                    }
+           }
         }
-    }
+
+
 }
 
 

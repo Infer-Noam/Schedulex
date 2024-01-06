@@ -51,6 +51,6 @@ class TimeViewModel @Inject constructor(
 
 data class TimeUiState(
   //  val splitView: Boolean = false,
-    val timeBlocks: List<Time> = listOf<Time>(),
+    val timeBlocks: List<Time> = emptyList<Time>(),
 )
 

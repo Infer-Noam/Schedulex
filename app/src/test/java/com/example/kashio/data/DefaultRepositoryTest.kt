@@ -31,7 +31,7 @@ import com.example.kashio.data.local.database.TimeDao
 /**
  * Unit tests for [DefaultRepository].
  */
-@OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
+// TODO: Remove when stable
 class DefaultRepositoryTest {
 
     @Test

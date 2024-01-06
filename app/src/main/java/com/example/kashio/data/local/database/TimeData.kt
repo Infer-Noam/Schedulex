@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.Flow
 
 @Entity
 data class Time(
-    val time: String = "1400-01-01-2024",
-    val title: String = "i love noam",
-    val text: String = "the price for success is pain",
-    val tag: String = "im driven by pain, not fear - some random blond finn"
+    val time: String,
+    val title: String,
+    val text: String,
+    val tag: String
 ) {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
