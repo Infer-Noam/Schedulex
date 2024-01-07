@@ -14,10 +14,12 @@ import kotlinx.coroutines.flow.Flow
 
 @Entity
 data class Time(
-    val time: String,
+    val date: String,
     val title: String,
     val text: String,
-    val tag: String
+    val tag: String,
+    val startTime: String,
+    val endTime: String
 ) {
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0
@@ -26,11 +28,17 @@ data class Time(
 
 @Dao
 interface TimeDao {
-    @Query("SELECT * from time ORDER BY uid ASC")
-    fun getAllTime(): Flow<List<Time>>
+    //@Query("SELECT * from time ORDER BY uid ASC")
+    //fun getAllTime(): Flow<List<Time>>
 
     @Query("SELECT * from time WHERE uid = :id")
     fun getTime(id: Int): Flow<Time>
+
+    //@Query("SELECT * from time WHERE date = :date ORDER BY date ASC")
+  //  fun getTimeByDate(date: String): Flow<List<Time>>
+
+    @Query("SELECT * from time WHERE date = :date ORDER BY (endTime - startTime) ASC")
+    fun getAllTime(date: String): Flow<List<Time>>
 
     // Specify the conflict strategy as IGNORE, when the user tries to add an
     // existing Item into the database Room ignores the conflict.

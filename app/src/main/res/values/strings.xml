@@ -16,4 +16,5 @@
 
 <resources>
     <string name="app_name">Kashio</string>
+    <string name="time_block_expand_button_content_description">expand button</string>
 </resources>

@@ -16,12 +16,16 @@
 
 package com.example.kashio.data
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.example.kashio.data.local.database.Item
 import com.example.kashio.data.local.database.ItemDao
 import com.example.kashio.data.local.database.Time
 import com.example.kashio.data.local.database.TimeDao
+import java.time.LocalTime
+import java.util.Calendar
 import javax.inject.Inject
 
 interface Repository {
@@ -44,7 +48,8 @@ class DefaultRepository @Inject constructor(
 
 interface TimeRepository {
 
-    val times: Flow<List<Time>>
+    //val times: Flow<List<Time>>
+    fun getAllTimesForDate(date: String): Flow<List<Time>>
 
     suspend fun insert(time: Time)
 }
@@ -53,8 +58,12 @@ class DefaultTimeRepository @Inject constructor(
     private val timeDao: TimeDao
 ) : TimeRepository {
 
-    override val times: Flow<List<Time>> =
-        timeDao.getAllTime()
+   // @RequiresApi(Build.VERSION_CODES.O)
+  //  override val times: Flow<List<Time>> =
+      //  timeDao.getAllTime("09-01-2024")
+
+    override fun getAllTimesForDate(date: String): Flow<List<Time>> =
+        timeDao.getAllTime(date)
 
     override suspend fun insert(time: Time) {
         timeDao.insertTime(time)

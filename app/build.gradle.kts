@@ -84,6 +84,7 @@ dependencies {
 
 
 
+    implementation(libs.androidx.media3.common)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)

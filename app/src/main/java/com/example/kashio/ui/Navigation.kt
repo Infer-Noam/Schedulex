@@ -18,15 +18,10 @@ package com.example.kashio.ui
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.kashio.ui.ItemUi.DataItemTypeScreen
-import com.example.kashio.ui.TimeUi.TimeScreen
 import com.example.kashio.ui.TimeUi.TimeSubApp
 
 @RequiresApi(Build.VERSION_CODES.O)

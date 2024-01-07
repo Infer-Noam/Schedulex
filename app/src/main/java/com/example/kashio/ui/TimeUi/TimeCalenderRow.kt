@@ -2,7 +2,6 @@ package com.example.kashio.ui.TimeUi
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,25 +15,21 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 @Composable
-fun CalendarRow(selectedDay: String, onSelectDay: (String) -> Unit) {
+fun CalendarRow(selectedDate: String, onSelectDate: (String) -> Unit, saveUiDate: (date: String) -> Unit) {
     val calendar = Calendar.getInstance()
     val startDate = calendar.apply {
-        add(Calendar.DAY_OF_MONTH, -15)
+        add(Calendar.DAY_OF_MONTH, -60)
     }.time
     val endDate = calendar.apply {
-        add(Calendar.DAY_OF_MONTH, 30) // Add 30 because we subtracted 15 earlier
+        add(Calendar.DAY_OF_MONTH, 120) // Add 30 because we subtracted 15 earlier
     }.time
 
     val dates = generateSequence(startDate) { date ->
@@ -52,7 +47,7 @@ fun CalendarRow(selectedDay: String, onSelectDay: (String) -> Unit) {
         .toList()
 
     val currentDateIndex = dates.indexOfFirst {
-        it.third == selectedDay
+        it.third == selectedDate
     }
 
     LazyRow(
@@ -63,7 +58,8 @@ fun CalendarRow(selectedDay: String, onSelectDay: (String) -> Unit) {
                 modifier = Modifier
                     .padding(8.dp)
                     .size(55.dp)  // Set a fixed size for the Card
-                    .clickable(onClick = { onSelectDay(dateFormat) }),
+                    .clickable { onSelectDate(dateFormat)
+                               saveUiDate(dateFormat)},
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 4.dp
                 ),
@@ -73,7 +69,7 @@ fun CalendarRow(selectedDay: String, onSelectDay: (String) -> Unit) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxSize()
-                        .background(if (selectedDay == dateFormat) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primaryContainer),
+                        .background(if (selectedDate == dateFormat) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primaryContainer),
 
                     ) {
                     Text(
