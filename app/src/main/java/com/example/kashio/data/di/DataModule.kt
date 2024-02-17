@@ -16,16 +16,24 @@
 
 package com.example.kashio.data.di
 
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import com.example.kashio.data.DefaultRepository
+import com.example.kashio.data.DefaultSettingsRepository
+import com.example.kashio.data.DefaultTimeRepository
+import com.example.kashio.data.Repository
+import com.example.kashio.data.SettingsRepository
+import com.example.kashio.data.TimeRepository
+import com.example.kashio.dataStore
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import com.example.kashio.data.Repository
-import com.example.kashio.data.DefaultRepository
-import com.example.kashio.data.DefaultTimeRepository
-import com.example.kashio.data.TimeRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -45,12 +53,30 @@ interface DataModule {
         timeRepository: DefaultTimeRepository
     ): TimeRepository
 
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object DataStoreModule {
+
+        @Singleton
+        @Provides
+        fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+            return context.dataStore
+        }
+    }
+
+
+    @Singleton
+    @Binds
+    fun bindsSettingsRepository(
+        settingsRepository: DefaultSettingsRepository
+    ): SettingsRepository
+
 }
 
 class FakeRepository @Inject constructor() : Repository {
-    override val dataItemTypes: Flow<List<String>> = flowOf(fakeDataItemTypes)
+    override val dataTitleTypes: Flow<List<String>> = flowOf(fakeDataItemTypes)
 
-    override suspend fun add(name: String) {
+    override suspend fun add(title: String, color: String) {
         throw NotImplementedError()
     }
 }

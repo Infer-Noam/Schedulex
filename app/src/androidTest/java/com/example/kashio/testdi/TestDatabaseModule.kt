@@ -32,7 +32,7 @@ import com.example.kashio.data.di.FakeRepository
 interface FakeDataModule {
 
     @Binds
-    abstract fun bindRepository(
+    fun bindRepository(
         fakeRepository: FakeRepository
     ): Repository
 }

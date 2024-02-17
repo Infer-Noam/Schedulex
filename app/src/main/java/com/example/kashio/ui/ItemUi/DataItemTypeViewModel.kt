@@ -18,6 +18,10 @@ package com.example.kashio.ui.ItemUi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kashio.data.Repository
+import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Error
+import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Loading
+import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -25,10 +29,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import com.example.kashio.data.Repository
-import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Error
-import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Loading
-import com.example.kashio.ui.ItemUi.DataItemTypeUiState.Success
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,13 +37,13 @@ class DataItemTypeViewModel @Inject constructor(
 ) : ViewModel() {
 
     val uiState: StateFlow<DataItemTypeUiState> = repository
-        .dataItemTypes.map<List<String>, DataItemTypeUiState>(::Success)
+        .dataTitleTypes.map<List<String>, DataItemTypeUiState>(::Success)
         .catch { emit(Error(it)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Loading)
 
-    fun addDataItemType(name: String) {
+    fun addDataItemType(title: String, color: String) {
         viewModelScope.launch {
-            repository.add(name)
+            repository.add(title, color)
         }
     }
 }

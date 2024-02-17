@@ -18,14 +18,14 @@ package com.example.kashio.data.local.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.kashio.data.local.database.AppDatabase
+import com.example.kashio.data.local.database.TimeDao
+import com.example.kashio.data.local.database.TitleDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import com.example.kashio.data.local.database.AppDatabase
-import com.example.kashio.data.local.database.ItemDao
-import com.example.kashio.data.local.database.TimeDao
 import javax.inject.Singleton
 
 
@@ -33,8 +33,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
     @Provides
-    fun provideDataItemTypeDao(appDatabase: AppDatabase): ItemDao {
-        return appDatabase.itemDao()
+    fun provideTitleDao(appDatabase: AppDatabase): TitleDao {
+        return appDatabase.titleDao()
     }
 
     @Provides
@@ -49,6 +49,8 @@ class DatabaseModule {
             appContext,
             AppDatabase::class.java,
             "DataBase"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 }

@@ -50,7 +50,7 @@ private class FakeRepository : Repository {
 
     private val data = mutableListOf<String>()
 
-    override val dataItemTypes: Flow<List<String>>
+    override val dataTitleTypes: Flow<List<String>>
         get() = flow { emit(data.toList()) }
 
     override suspend fun add(name: String) {
