@@ -1,20 +1,20 @@
 [versions]
-androidGradlePlugin = "8.2.2"
+androidGradlePlugin = "8.3.0"
 androidxCore = "1.12.0"
 androidxLifecycle = "2.7.0"
 androidxActivity = "1.8.2"
-androidxComposeBom = "2024.02.00"
-androidxComposeCompiler = "1.5.9"
-androidxHilt = "1.1.0"
+androidxComposeBom = "2024.02.02"
+androidxComposeCompiler = "1.5.10"
+androidxHilt = "1.2.0"
 androidxNavigation = "2.7.7"
 androidxRoom = "2.6.1"
 androidxTest = "1.5.0"
 androidxTestExt = "1.1.5"
 androidxTestRunner = "1.5.2"
 colorpickerCompose = "1.0.7"
-coroutines = "1.7.4"
+coroutines = "1.8.0"
 datastorePreferences = "1.0.0"
-hilt = "2.50"
+hilt = "2.51"
 junit = "4.13.2"
 kotlin = "1.9.22"
 ksp = "1.9.22-1.0.17"
@@ -22,6 +22,7 @@ media3Common = "1.2.1"
 composeMaterial = "1.3.0"
 datastoreCore = "1.0.0"
 datastorePreferencesCore = "1.0.0"
+coreI18n = "1.0.0-alpha01"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -57,6 +58,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 androidx-media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Common" }
 androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastoreCore" }
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastorePreferencesCore" }
+androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

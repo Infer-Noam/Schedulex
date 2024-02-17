@@ -29,6 +29,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Kashio"
+rootProject.name = "Schedulex"
 
 include(":app")

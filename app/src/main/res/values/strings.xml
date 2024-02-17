@@ -15,6 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Kashio</string>
+    <string name="app_name">Schedulex</string>
     <string name="time_block_expand_button_content_description">expand button</string>
+    <string name="time_block_notification_symbol">notification symbol\n</string>
 </resources>

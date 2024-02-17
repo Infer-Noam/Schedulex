@@ -24,17 +24,17 @@ plugins {
 }
 
 android {
-    namespace = "com.example.kashio"
+    namespace = "com.example.schedulex"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.kashio"
-        minSdk = 26
+        applicationId = "com.example.schedulex"
+        minSdk = 29
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.example.kashio.HiltTestRunner"
+        testInstrumentationRunner = "com.example.schedulex.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -49,6 +49,8 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            //isDebuggable = true
+            //signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -87,6 +89,7 @@ dependencies {
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.datastore.preferences.core)
+    implementation(libs.androidx.core.i18n)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -119,6 +122,8 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+
+    implementation("androidx.compose.material3:material3-window-size-class")
 
     // Tooling
     debugImplementation(libs.androidx.compose.ui.tooling)

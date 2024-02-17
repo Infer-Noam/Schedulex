@@ -17,5 +17,5 @@
 
 <resources>
 
-    <style name="Theme.Kashio" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Schedulex" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
